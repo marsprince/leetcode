@@ -41,6 +41,18 @@
  * @return {string}
  */
 var longestCommonPrefix = function(strs) {
-    
+    if(strs.length === 0) return ''
+    const target = strs[0]
+    let output = ''
+    for(let i=0;i<target.length;i++) {
+        if(strs.every(item=>{
+            return item[i] === target[i]
+        })) {
+           output+=target[i]
+        } else {
+            break;
+        }
+    }
+    return output
 };
 
