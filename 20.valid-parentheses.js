@@ -64,6 +64,22 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    
+    let stack = [];
+    const left = '([{';
+    const right = ')]}';
+    for(let i=0;i<s.length;i++) {
+       const str = s[i];
+       if(left.lastIndexOf(str)!==-1) {
+           stack.push(str);
+           continue;
+       }
+       const rightIndex = right.lastIndexOf(str);
+       if(rightIndex!==-1 && left.lastIndexOf(stack.pop()) === rightIndex) {
+        continue;
+       } else {
+           return false
+       }
+    }
+    return stack.length ===0 ? true :false
 };
 
