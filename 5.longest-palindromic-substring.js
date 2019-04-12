@@ -87,7 +87,7 @@ var longestPalindrome1 = function(s) {
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
+var longestPalindrome2 = function(s) {
     // 传说中的马拉车法
     // 首先插入一个#
     let newstr = '#';
@@ -144,4 +144,37 @@ var longestPalindrome = function(s) {
     return s.substr(originRight-originLongestPalindrome,originLongestPalindrome)
 };
 
-console.log(longestPalindrome('"babad"'))
+/**
+ * 动态规划
+ * dp[i,j] = str[i] === str[j] ? dp[i+1,j-1] : 0
+ * dp[i,i] = 1
+ * dp[i][i+1]=1 if str[i]==str[i+1]
+ */
+
+var longestPalindrome = function(s) {
+    if(s==='') return s
+   let max = {
+       length: 0,
+       position: null
+   }
+   let result = {};
+   for(let i=s.length-1;i>=0;i--) {
+       result[i] = {}
+       for(let j=i;j<s.length;j++) {
+           if(i ===j) {
+                result[i][j] = true
+           } else {
+               if(j ===i+1) {
+                 result[i][j] = s[i] === s[j] ? true : false
+               } else {
+                 result[i][j] = s[i] === s[j] ? result[i+1][j-1] : false
+               }
+           }
+           if(result[i][j] && j-i+1>max.length) {
+             max.length = j-i+1
+             max.position = {i,j}
+           }
+       }
+   }
+   return s.substring(max.position.i,max.position.j+1)
+};
