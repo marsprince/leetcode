@@ -31,11 +31,5 @@
  * @return {number}
  */
 var lengthOfLastWord = function(s) {
-    const arr = s.split(/\s+/g)
-    for(let i=arr.length-1;i>=0;i--) {
-        if(arr[i]!=='') {
-            return arr[i].length
-        }
-    }
-    return 0
+    return s.trim().split(" ").pop().length;
 };
