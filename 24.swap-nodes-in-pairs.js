@@ -21,4 +21,3 @@ var swapPairs = function(head) {
    temp.next = head
    return temp
 };
-
